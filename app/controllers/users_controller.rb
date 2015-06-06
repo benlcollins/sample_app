@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   		redirect_to @user
   	else
   		# fail to save
+      flash.now[:danger] = "Invalid signup information"
   		render :new
   	end
   end

@@ -12,8 +12,11 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 		post login_path, session: { email: "", password: "" }
 		assert_template 'sessions/new'
 		assert_not flash.empty?
+		assert_equal flash[:danger], "Invalid email/password combination", "Invalid login flash message not showing"
+		assert_select 'div.alert.alert-danger'
 		get root_path
 		assert flash.empty?
+		# flunk "Still working on this test"
 	end
 
 	test "login with valid information followed by logout" do
